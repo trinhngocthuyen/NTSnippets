@@ -23,6 +23,7 @@
 		8D06FE871E055414006D790D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D06FE8A1E055414006D790D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D06FE8C1E055414006D790D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D06FE961E0586C7006D790D /* RAC_LifeTime.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RAC_LifeTime.playground; sourceTree = "<group>"; };
 		FE8000B1410AF387129863B4 /* Pods-NTSnippets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTSnippets.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +82,7 @@
 		8D06FE921E057E33006D790D /* RAC */ = {
 			isa = PBXGroup;
 			children = (
+				8D06FE961E0586C7006D790D /* RAC_LifeTime.playground */,
 			);
 			path = RAC;
 			sourceTree = "<group>";
