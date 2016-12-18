@@ -29,7 +29,6 @@ infix operator <||? : NTOperatorRight
 infix operator >>> : NTOperatorLeft
 infix operator <<< : NTOperatorRight
 infix operator >>>? : NTOperatorLeft
-infix operator <<<? : NTOperatorRight
 
 infix operator <*> : NTOperatorLeft
 

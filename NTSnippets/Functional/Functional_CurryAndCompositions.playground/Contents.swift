@@ -36,6 +36,8 @@ let _user2 = parseJSON <|? loadJSON <| ()
 // C3: Both (left + right) associative
 let _user3 = (loadJSON >>>? parseJSON) <| ()
 
+let _user4 = loadJSON >>>? parseJSON <*> ()
+
 /// MARK: - Discussion
 /// ---------------------------------------------------------------
 /*
