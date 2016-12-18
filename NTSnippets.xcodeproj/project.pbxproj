@@ -12,6 +12,7 @@
 		8D06FE831E055414006D790D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FE821E055414006D790D /* ViewController.swift */; };
 		8D06FE881E055414006D790D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D06FE871E055414006D790D /* Assets.xcassets */; };
 		8D06FE8B1E055414006D790D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D06FE891E055414006D790D /* LaunchScreen.storyboard */; };
+		8D06FEAC1E0682B9006D790D /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FEAB1E0682B9006D790D /* Curry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8D06FE8A1E055414006D790D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D06FE8C1E055414006D790D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D06FE961E0586C7006D790D /* RAC_LifeTime.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RAC_LifeTime.playground; sourceTree = "<group>"; };
+		8D06FEAB1E0682B9006D790D /* Curry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
 		FE8000B1410AF387129863B4 /* Pods-NTSnippets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTSnippets.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,8 @@
 		8D06FE7F1E055414006D790D /* NTSnippets */ = {
 			isa = PBXGroup;
 			children = (
+				8D06FEAA1E068296006D790D /* Functional */,
+				8D06FEA91E068284006D790D /* Architecture */,
 				8D06FE941E057E7F006D790D /* RxSwift */,
 				8D06FE921E057E33006D790D /* RAC */,
 				8D06FE801E055414006D790D /* AppDelegate.swift */,
@@ -92,6 +96,21 @@
 			children = (
 			);
 			path = RxSwift;
+			sourceTree = "<group>";
+		};
+		8D06FEA91E068284006D790D /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Architecture;
+			sourceTree = "<group>";
+		};
+		8D06FEAA1E068296006D790D /* Functional */ = {
+			isa = PBXGroup;
+			children = (
+				8D06FEAB1E0682B9006D790D /* Curry.swift */,
+			);
+			path = Functional;
 			sourceTree = "<group>";
 		};
 		C726AF965B47FD2693BD0B1F /* Pods */ = {
@@ -227,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D06FE831E055414006D790D /* ViewController.swift in Sources */,
+				8D06FEAC1E0682B9006D790D /* Curry.swift in Sources */,
 				8D06FE811E055414006D790D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
