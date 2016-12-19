@@ -35,6 +35,7 @@
 		8D06FED81E06CA96006D790D /* NTFunctional.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NTFunctional.h; sourceTree = "<group>"; };
 		8D06FED91E06CA96006D790D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D06FEDE1E06CAA9006D790D /* Functional_CurryAndCompositions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_CurryAndCompositions.playground; sourceTree = "<group>"; };
+		8D4D09991E08449E00E8CCE7 /* Functional_Curry_ChangeCompletionToRAC.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_Curry_ChangeCompletionToRAC.playground; sourceTree = "<group>"; };
 		FE8000B1410AF387129863B4 /* Pods-NTSnippets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTSnippets.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				8D06FEDE1E06CAA9006D790D /* Functional_CurryAndCompositions.playground */,
+				8D4D09991E08449E00E8CCE7 /* Functional_Curry_ChangeCompletionToRAC.playground */,
 				8D06FEAB1E0682B9006D790D /* Curry.swift */,
 				8D06FEBE1E0686A3006D790D /* FunctionCompositions.swift */,
 			);
@@ -539,6 +541,7 @@
 				8D06FEDC1E06CA96006D790D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
