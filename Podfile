@@ -1,9 +1,25 @@
 platform :ios, '9.0'
 use_frameworks!
 
+def shared_pods
+    pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
+    pod 'RxSwift', '~> 3.0.0'
+    pod 'Alamofire', '4.2.0'
+end
+
+def testing_pods
+    pod 'Quick', '1.0.0'
+    pod 'Nimble', '5.1.0'
+    pod 'Mockingjay', '2.0.0'
+    pod 'Cuckoo', '0.8.2'
+end
+
 target 'NTSnippets' do
-  pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
-  pod 'RxSwift', '~> 3.0.0'
+    shared_pods
+end
+
+target 'NTTesting' do
+    testing_pods
 end
 
 post_install do |installer|

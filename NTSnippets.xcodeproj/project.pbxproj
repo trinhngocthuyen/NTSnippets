@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D2C15B65A48D2ADFF79CBB7 /* Pods_NTSnippets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACBEA2109B004B5E963104B /* Pods_NTSnippets.framework */; };
+		7337C8FDB943D5F5B2F82288 /* Pods_NTTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9AA2D5C1C7EB9DF974AD6C /* Pods_NTTesting.framework */; };
 		8D06FE811E055414006D790D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FE801E055414006D790D /* AppDelegate.swift */; };
 		8D06FE831E055414006D790D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FE821E055414006D790D /* ViewController.swift */; };
 		8D06FE881E055414006D790D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D06FE871E055414006D790D /* Assets.xcassets */; };
@@ -17,10 +18,17 @@
 		8D06FEDA1E06CA96006D790D /* NTFunctional.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D06FED81E06CA96006D790D /* NTFunctional.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D06FEDF1E06CAE1006D790D /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FEAB1E0682B9006D790D /* Curry.swift */; };
 		8D06FEE01E06CAE1006D790D /* FunctionCompositions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D06FEBE1E0686A3006D790D /* FunctionCompositions.swift */; };
+		8DD765B01E18DD7000D6B6C8 /* Ex_StubNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD765AF1E18DD7000D6B6C8 /* Ex_StubNetwork.swift */; };
+		8DD765B21E18E05D00D6B6C8 /* Ex_Cuckoo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD765B11E18E05D00D6B6C8 /* Ex_Cuckoo.swift */; };
+		8DD765B41E18E0FA00D6B6C8 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD765B31E18E0FA00D6B6C8 /* Person.swift */; };
+		8DD765B61E18E51400D6B6C8 /* MockPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD765B51E18E51400D6B6C8 /* MockPerson.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D7A703CB6D2288E9CCF0D75 /* Pods-NTTesting.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTTesting.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTTesting/Pods-NTTesting.release.xcconfig"; sourceTree = "<group>"; };
 		27B6DFC79C0F586D41B55ED8 /* Pods-NTSnippets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTSnippets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets.debug.xcconfig"; sourceTree = "<group>"; };
+		297BDAC9749C270057B4439D /* Pods-NTTesting.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTTesting.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NTTesting/Pods-NTTesting.debug.xcconfig"; sourceTree = "<group>"; };
+		7A9AA2D5C1C7EB9DF974AD6C /* Pods_NTTesting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NTTesting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACBEA2109B004B5E963104B /* Pods_NTSnippets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NTSnippets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D06FE7D1E055414006D790D /* NTSnippets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NTSnippets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D06FE801E055414006D790D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +44,12 @@
 		8D06FED91E06CA96006D790D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D06FEDE1E06CAA9006D790D /* Functional_CurryAndCompositions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_CurryAndCompositions.playground; sourceTree = "<group>"; };
 		8D4D09991E08449E00E8CCE7 /* Functional_Curry_ChangeCompletionToRAC.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_Curry_ChangeCompletionToRAC.playground; sourceTree = "<group>"; };
+		8DD765A51E18DAAA00D6B6C8 /* NTTesting.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NTTesting.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD765A91E18DAAA00D6B6C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DD765AF1E18DD7000D6B6C8 /* Ex_StubNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ex_StubNetwork.swift; sourceTree = "<group>"; };
+		8DD765B11E18E05D00D6B6C8 /* Ex_Cuckoo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ex_Cuckoo.swift; sourceTree = "<group>"; };
+		8DD765B31E18E0FA00D6B6C8 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		8DD765B51E18E51400D6B6C8 /* MockPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockPerson.swift; sourceTree = "<group>"; };
 		FE8000B1410AF387129863B4 /* Pods-NTSnippets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTSnippets.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +69,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DD765A21E18DAAA00D6B6C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7337C8FDB943D5F5B2F82288 /* Pods_NTTesting.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -62,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				7ACBEA2109B004B5E963104B /* Pods_NTSnippets.framework */,
+				7A9AA2D5C1C7EB9DF974AD6C /* Pods_NTTesting.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -71,6 +94,7 @@
 			children = (
 				8D06FE7F1E055414006D790D /* NTSnippets */,
 				8D06FED71E06CA96006D790D /* NTFunctional */,
+				8DD765A61E18DAAA00D6B6C8 /* NTTesting */,
 				8D06FE7E1E055414006D790D /* Products */,
 				C726AF965B47FD2693BD0B1F /* Pods */,
 				3DF3C6C4DCA64EC7A8804740 /* Frameworks */,
@@ -82,6 +106,7 @@
 			children = (
 				8D06FE7D1E055414006D790D /* NTSnippets.app */,
 				8D06FED61E06CA96006D790D /* NTFunctional.framework */,
+				8DD765A51E18DAAA00D6B6C8 /* NTTesting.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,11 +169,33 @@
 			path = NTFunctional;
 			sourceTree = "<group>";
 		};
+		8DD765A61E18DAAA00D6B6C8 /* NTTesting */ = {
+			isa = PBXGroup;
+			children = (
+				8DD765AE1E18DD7000D6B6C8 /* Examples */,
+				8DD765A91E18DAAA00D6B6C8 /* Info.plist */,
+			);
+			path = NTTesting;
+			sourceTree = "<group>";
+		};
+		8DD765AE1E18DD7000D6B6C8 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				8DD765B31E18E0FA00D6B6C8 /* Person.swift */,
+				8DD765B51E18E51400D6B6C8 /* MockPerson.swift */,
+				8DD765AF1E18DD7000D6B6C8 /* Ex_StubNetwork.swift */,
+				8DD765B11E18E05D00D6B6C8 /* Ex_Cuckoo.swift */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
 		C726AF965B47FD2693BD0B1F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				27B6DFC79C0F586D41B55ED8 /* Pods-NTSnippets.debug.xcconfig */,
 				FE8000B1410AF387129863B4 /* Pods-NTSnippets.release.xcconfig */,
+				297BDAC9749C270057B4439D /* Pods-NTTesting.debug.xcconfig */,
+				0D7A703CB6D2288E9CCF0D75 /* Pods-NTTesting.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -205,13 +252,33 @@
 			productReference = 8D06FED61E06CA96006D790D /* NTFunctional.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		8DD765A41E18DAAA00D6B6C8 /* NTTesting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DD765AC1E18DAAA00D6B6C8 /* Build configuration list for PBXNativeTarget "NTTesting" */;
+			buildPhases = (
+				6B29C969F53F40017F463262 /* [CP] Check Pods Manifest.lock */,
+				8DD765A11E18DAAA00D6B6C8 /* Sources */,
+				8DD765A21E18DAAA00D6B6C8 /* Frameworks */,
+				8DD765A31E18DAAA00D6B6C8 /* Resources */,
+				D5B04F6E1CB211CDA4E48148 /* [CP] Embed Pods Frameworks */,
+				4904A3FFFABB22760431D691 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NTTesting;
+			productName = NTTesting;
+			productReference = 8DD765A51E18DAAA00D6B6C8 /* NTTesting.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8D06FE751E055414006D790D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Thuyen Trinh";
 				TargetAttributes = {
@@ -222,6 +289,11 @@
 					};
 					8D06FED51E06CA96006D790D = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = S35NJ68C7W;
+						ProvisioningStyle = Automatic;
+					};
+					8DD765A41E18DAAA00D6B6C8 = {
+						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = S35NJ68C7W;
 						ProvisioningStyle = Automatic;
 					};
@@ -242,6 +314,7 @@
 			targets = (
 				8D06FE7C1E055414006D790D /* NTSnippets */,
 				8D06FED51E06CA96006D790D /* NTFunctional */,
+				8DD765A41E18DAAA00D6B6C8 /* NTTesting */,
 			);
 		};
 /* End PBXProject section */
@@ -257,6 +330,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8D06FED41E06CA96006D790D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD765A31E18DAAA00D6B6C8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,6 +391,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NTSnippets/Pods-NTSnippets-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4904A3FFFABB22760431D691 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NTTesting/Pods-NTTesting-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B29C969F53F40017F463262 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D5B04F6E1CB211CDA4E48148 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NTTesting/Pods-NTTesting-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -331,6 +456,17 @@
 			files = (
 				8D06FEE01E06CAE1006D790D /* FunctionCompositions.swift in Sources */,
 				8D06FEDF1E06CAE1006D790D /* Curry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DD765A11E18DAAA00D6B6C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD765B61E18E51400D6B6C8 /* MockPerson.swift in Sources */,
+				8DD765B41E18E0FA00D6B6C8 /* Person.swift in Sources */,
+				8DD765B21E18E05D00D6B6C8 /* Ex_Cuckoo.swift in Sources */,
+				8DD765B01E18DD7000D6B6C8 /* Ex_StubNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +649,36 @@
 			};
 			name = Release;
 		};
+		8DD765AA1E18DAAA00D6B6C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 297BDAC9749C270057B4439D /* Pods-NTTesting.debug.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = S35NJ68C7W;
+				INFOPLIST_FILE = NTTesting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thuyen.NTTesting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		8DD765AB1E18DAAA00D6B6C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D7A703CB6D2288E9CCF0D75 /* Pods-NTTesting.release.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = S35NJ68C7W;
+				INFOPLIST_FILE = NTTesting/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thuyen.NTTesting;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -539,6 +705,15 @@
 			buildConfigurations = (
 				8D06FEDB1E06CA96006D790D /* Debug */,
 				8D06FEDC1E06CA96006D790D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DD765AC1E18DAAA00D6B6C8 /* Build configuration list for PBXNativeTarget "NTTesting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DD765AA1E18DAAA00D6B6C8 /* Debug */,
+				8DD765AB1E18DAAA00D6B6C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
