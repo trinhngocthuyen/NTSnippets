@@ -20,3 +20,9 @@ class Person {
         return "Hello \(other.name)!"
     }
 }
+
+extension Person {
+    func makeFriend(with other: Person) {
+        _ = sayGreeting(to: other)
+    }
+}

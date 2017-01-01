@@ -15,19 +15,29 @@ class Ex_CuckooSpec: QuickSpec {
         
         let mockPerson = MockPerson(name: "")
         
-        Cuckoo.stub(mockPerson) { (stub) in
-            when(stub.name.get).thenReturn("Thuyen")
-            when(stub.name.set(any())).thenDoNothing()
-            when(stub.age.get).thenReturn(25)
-            when(stub.age.set(any())).thenDoNothing()
-            when(stub.sayGreeting(to: any())).then { "Hi \($0.name)!" }
-        }
-        
         describe("MockPerson") {
+            beforeEach {
+                reset(mockPerson)
+                Cuckoo.stub(mockPerson) { (stub) in
+                    when(stub.name.get).thenReturn("Thuyen")
+                    when(stub.name.set(any())).thenDoNothing()
+                    when(stub.age.get).thenReturn(25)
+                    when(stub.age.set(any())).thenDoNothing()
+                    when(stub.sayGreeting(to: any())).then { "Hi \($0.name)!" }
+                }
+            }
+            
             it("should return the STUBBED info") {
                 expect(mockPerson.name).to(equal("Thuyen"))
                 expect(mockPerson.age).to(equal(25))
                 expect(mockPerson.sayGreeting(to: Person(name: "Chris"))).to(equal("Hi Chris!"))
+            }
+            
+            context("make friend") {
+                it("should say greetings") {
+                    mockPerson.makeFriend(with: Person(name: "Sophia"))
+                    verify(mockPerson).sayGreeting(to: ParameterMatcher { p in p.name == "Sophia" })
+                }
             }
         }
     }
