@@ -10,10 +10,10 @@ PODS:
     - Mockingjay/Core
   - Nimble (5.1.0)
   - Quick (1.0.0)
-  - ReactiveCocoa (5.0.0-alpha.3):
-    - ReactiveSwift (~> 1.0.0-alpha.3)
-  - ReactiveSwift (1.0.0-alpha.4):
-    - Result (~> 3.0)
+  - ReactiveCocoa (5.0.0):
+    - ReactiveSwift (~> 1.0.0)
+  - ReactiveSwift (1.0.0):
+    - Result (~> 3.1)
   - Result (3.1.0)
   - RxSwift (3.0.1)
   - URITemplate (2.0.0)
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - Mockingjay (= 2.0.0)
   - Nimble (= 5.1.0)
   - Quick (= 1.0.0)
-  - ReactiveCocoa (~> 5.0.0-alpha.3)
+  - ReactiveCocoa (= 5.0.0)
   - RxSwift (~> 3.0.0)
 
 SPEC CHECKSUMS:
@@ -33,12 +33,12 @@ SPEC CHECKSUMS:
   Mockingjay: 7122a3fc0597aa63438e4cd9b71b7bc8aac05b87
   Nimble: 5ea121a2eda60440287054cde077fc0ad22227b3
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  ReactiveCocoa: d8a03d3deae0dd76410a30589946328d76ab9d2b
-  ReactiveSwift: 3fa49d2db97609ea700cd2b8f1bfbdd162024f97
+  ReactiveCocoa: 60ef0da915b4f70c34ebecc3f4fb8f96af0e53d6
+  ReactiveSwift: f391724ee318a2cfd3e37dfb041cd49ecf4e7869
   Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
   RxSwift: af5680055c4ad04480189c52d28385b1029493a6
   URITemplate: a5acb3f76c6a2338116fde88b658d83f91bbac45
 
-PODFILE CHECKSUM: a84ac8232d2ef2bc89ae50c8cb29feeaa6a5c031
+PODFILE CHECKSUM: c1ed77442e51c104c0068e903643bbb0921e1048
 
 COCOAPODS: 1.1.1

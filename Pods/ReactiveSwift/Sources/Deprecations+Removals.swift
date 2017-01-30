@@ -52,6 +52,19 @@ extension Disposable {
 	public var disposed: Bool { fatalError() }
 }
 
+extension SerialDisposable {
+	@available(*, unavailable, renamed:"inner")
+	public var innerDisposable: Disposable? {
+		get { fatalError() }
+		set { fatalError() }
+ }
+}
+
+extension ScopedDisposable {
+	@available(*, unavailable, renamed:"inner")
+	public var innerDisposable: Disposable { fatalError() }
+}
+
 extension ActionProtocol {
 	@available(*, unavailable, renamed:"isEnabled")
 	public var enabled: Bool { fatalError() }
@@ -279,6 +292,9 @@ extension SignalProducerProtocol {
 
 	@available(*, unavailable, message:"This SignalProducer may emit errors which must be handled explicitly, or observed using `startWithResult(_:)`.")
 	public func startWithNext(_ next: (Value) -> Void) -> Disposable { fatalError() }
+
+	@available(*, unavailable, renamed:"repeat(_:)")
+	public func times(_ count: Int) -> SignalProducer<Value, Error> { fatalError() }
 }
 
 extension SignalProducerProtocol where Value: OptionalProtocol {
@@ -294,6 +310,12 @@ extension SignalProducerProtocol where Error == NoError {
 extension SignalProducer {
 	@available(*, unavailable, message:"Use properties instead. `buffer(_:)` is removed in RAC 5.0.")
 	public static func buffer(_ capacity: Int) -> (SignalProducer, Signal<Value, Error>.Observer) { fatalError() }
+
+	@available(*, unavailable, renamed:"init(_:)")
+	public init<S: SignalProtocol>(signal: S) where S.Value == Value, S.Error == Error { fatalError() }
+
+	@available(*, unavailable, renamed:"init(_:)")
+	public init<S: Sequence>(values: S) where S.Iterator.Element == Value { fatalError() }
 }
 
 extension PropertyProtocol {
@@ -305,10 +327,10 @@ extension PropertyProtocol {
 }
 
 extension Property {
-	@available(*, unavailable, renamed:"AnyProperty(initial:then:)")
+	@available(*, unavailable, renamed:"Property(initial:then:)")
 	public convenience init(initialValue: Value, producer: SignalProducer<Value, NoError>) { fatalError() }
 
-	@available(*, unavailable, renamed:"AnyProperty(initial:then:)")
+	@available(*, unavailable, renamed:"Property(initial:then:)")
 	public convenience init(initialValue: Value, signal: Signal<Value, NoError>) { fatalError() }
 }
 
@@ -353,6 +375,11 @@ extension NotificationCenter {
 extension URLSession {
 	@available(*, unavailable, renamed:"reactive.data")
 	public func rac_data(with request: URLRequest) -> SignalProducer<(Data, URLResponse), NSError> { fatalError() }
+}
+
+extension Reactive where Base: URLSession {
+	@available(*, unavailable, message:"Use the overload which returns `SignalProducer<(Data, URLResponse), AnyError>` instead, and cast `AnyError.error` to `NSError` as you need")
+	public func data(with request: URLRequest) -> SignalProducer<(Data, URLResponse), NSError> { fatalError() }
 }
 
 // Free functions

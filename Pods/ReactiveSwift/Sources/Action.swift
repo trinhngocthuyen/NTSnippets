@@ -78,6 +78,9 @@ public final class Action<Input, Output, Error: Swift.Error> {
 	public init<State: PropertyProtocol>(state property: State, enabledIf isEnabled: @escaping (State.Value) -> Bool, _ execute: @escaping (State.Value, Input) -> SignalProducer<Output, Error>) {
 		deinitToken = Lifetime.Token()
 		lifetime = Lifetime(deinitToken)
+		
+		// Retain the `property` for the created `Action`.
+		lifetime.ended.observeCompleted { _ = property }
 
 		executeClosure = { state, input in execute(state as! State.Value, input) }
 
@@ -203,6 +206,7 @@ private struct ActionState {
 	}
 }
 
+/// A protocol used to constraint `Action` initializers.
 public protocol ActionProtocol: BindingTargetProtocol {
 	/// The type of argument to apply the action to.
 	associatedtype Input

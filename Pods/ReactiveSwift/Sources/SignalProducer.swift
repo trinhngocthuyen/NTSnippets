@@ -29,7 +29,7 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 	///
 	/// - parameters:
 	///   - signal: A signal to observe after starting the producer.
-	public init<S: SignalProtocol>(signal: S) where S.Value == Value, S.Error == Error {
+	public init<S: SignalProtocol>(_ signal: S) where S.Value == Value, S.Error == Error {
 		self.init { observer, disposable in
 			disposable += signal.observe(observer)
 		}
@@ -100,7 +100,7 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 	/// - parameters:
 	///   - values: A sequence of values that a `Signal` will send as separate
 	///             `value` events and then complete.
-	public init<S: Sequence>(values: S) where S.Iterator.Element == Value {
+	public init<S: Sequence>(_ values: S) where S.Iterator.Element == Value {
 		self.init { observer, disposable in
 			for value in values {
 				observer.send(value: value)
@@ -122,7 +122,7 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 	///   - second: Second value for the `Signal` to send.
 	///   - tail: Rest of the values to be sent by the `Signal`.
 	public init(values first: Value, _ second: Value, _ tail: Value...) {
-		self.init(values: [ first, second ] + tail)
+		self.init([ first, second ] + tail)
 	}
 
 	/// A producer for a Signal that will immediately complete without sending
@@ -138,30 +138,6 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 		return self.init { _ in return }
 	}
 
-	/// Create a `SignalProducer` that will attempt the given operation once for
-	/// each invocation of `start()`.
-	///
-	/// Upon success, the started signal will send the resulting value then
-	/// complete. Upon failure, the started signal will fail with the error that
-	/// occurred.
-	///
-	/// - parameters:
-	///   - operation: A closure that returns instance of `Result`.
-	///
-	/// - returns: A `SignalProducer` that will forward `success`ful `result` as
-	///            `value` event and then complete or `failed` event if `result`
-	///            is a `failure`.
-	public static func attempt(_ operation: @escaping () -> Result<Value, Error>) -> SignalProducer {
-		return self.init { observer, disposable in
-			operation().analysis(ifSuccess: { value in
-				observer.send(value: value)
-				observer.sendCompleted()
-				}, ifFailure: { error in
-					observer.send(error: error)
-			})
-		}
-	}
-
 	/// Create a Signal from the producer, pass it into the given closure,
 	/// then start sending events on the Signal when the closure has returned.
 	///
@@ -172,18 +148,15 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 	/// - parameters:
 	///   - setUp: A closure that accepts a `signal` and `interrupter`.
 	public func startWithSignal(_ setup: (_ signal: Signal<Value, Error>, _ interrupter: Disposable) -> Void) {
-		let (signal, observer) = Signal<Value, Error>.pipe()
-
 		// Disposes of the work associated with the SignalProducer and any
 		// upstream producers.
 		let producerDisposable = CompositeDisposable()
 
+		let (signal, observer) = Signal<Value, Error>.pipe(disposable: producerDisposable)
+
 		// Directly disposed of when `start()` or `startWithSignal()` is
 		// disposed.
-		let cancelDisposable = ActionDisposable {
-			observer.sendInterrupted()
-			producerDisposable.dispose()
-		}
+		let cancelDisposable = ActionDisposable(action: observer.sendInterrupted)
 
 		setup(signal, cancelDisposable)
 
@@ -191,20 +164,11 @@ public struct SignalProducer<Value, Error: Swift.Error> {
 			return
 		}
 
-		let wrapperObserver: Signal<Value, Error>.Observer = Observer { event in
-			observer.action(event)
-
-			if event.isTerminating {
-				// Dispose only after notifying the Signal, so disposal
-				// logic is consistently the last thing to run.
-				producerDisposable.dispose()
-			}
-		}
-
-		startHandler(wrapperObserver, producerDisposable)
+		startHandler(observer, producerDisposable)
 	}
 }
 
+/// A protocol used to constraint `SignalProducer` operators.
 public protocol SignalProducerProtocol {
 	/// The type of values being sent on the producer
 	associatedtype Value
@@ -445,7 +409,6 @@ extension SignalProducerProtocol {
 			}
 		}
 	}
-	
 
 	/// Lift a binary Signal operator to operate upon a Signal and a
 	/// SignalProducer instead.
@@ -462,27 +425,9 @@ extension SignalProducerProtocol {
 	///            `SignalProducer`.
 	public func lift<U, F, V, G>(_ transform: @escaping (Signal<Value, Error>) -> (Signal<U, F>) -> Signal<V, G>) -> (Signal<U, F>) -> SignalProducer<V, G> {
 		return { otherSignal in
-			return SignalProducer { observer, outerDisposable in
-				let (wrapperSignal, otherSignalObserver) = Signal<U, F>.pipe()
-
-				// Avoid memory leak caused by the direct use of the given
-				// signal.
-				//
-				// See https://github.com/ReactiveCocoa/ReactiveCocoa/pull/2758
-				// for the details.
-				outerDisposable += ActionDisposable {
-					otherSignalObserver.sendInterrupted()
-				}
-				outerDisposable += otherSignal.observe(otherSignalObserver)
-
-				self.startWithSignal { signal, disposable in
-					outerDisposable += disposable
-					outerDisposable += transform(signal)(wrapperSignal).observe(observer)
-				}
-			}
+			return self.liftRight(transform)(SignalProducer(otherSignal))
 		}
 	}
-	
 
 	/// Map each value in the producer to a new value.
 	///
@@ -812,6 +757,44 @@ extension SignalProducerProtocol {
 		return lift(Signal.sample(on:))(sampler)
 	}
 
+	/// Forward the latest value from `samplee` with the value from `self` as a
+	/// tuple, only when `self` sends a `value` event.
+	/// This is like a flipped version of `sample(with:)`, but `samplee`'s
+	/// terminal events are completely ignored.
+	///
+	/// - note: If `self` fires before a value has been observed on `samplee`,
+	///         nothing happens.
+	///
+	/// - parameters:
+	///   - samplee: A producer whose latest value is sampled by `self`.
+	///
+	/// - returns: A signal that will send values from `self` and `samplee`,
+	///            sampled (possibly multiple times) by `self`, then terminate
+	///            once `self` has terminated. **`samplee`'s terminated events
+	///            are ignored**.
+	public func withLatest<U>(from samplee: SignalProducer<U, NoError>) -> SignalProducer<(Value, U), Error> {
+		return liftRight(Signal.withLatest)(samplee)
+	}
+
+	/// Forward the latest value from `samplee` with the value from `self` as a
+	/// tuple, only when `self` sends a `value` event.
+	/// This is like a flipped version of `sample(with:)`, but `samplee`'s
+	/// terminal events are completely ignored.
+	///
+	/// - note: If `self` fires before a value has been observed on `samplee`,
+	///         nothing happens.
+	///
+	/// - parameters:
+	///   - samplee: A signal whose latest value is sampled by `self`.
+	///
+	/// - returns: A signal that will send values from `self` and `samplee`,
+	///            sampled (possibly multiple times) by `self`, then terminate
+	///            once `self` has terminated. **`samplee`'s terminated events
+	///            are ignored**.
+	public func withLatest<U>(from samplee: Signal<U, NoError>) -> SignalProducer<(Value, U), Error> {
+		return lift(Signal.withLatest)(samplee)
+	}
+
 	/// Forwards events from `self` until `lifetime` ends, at which point the
 	/// returned producer will complete.
 	///
@@ -1072,6 +1055,38 @@ extension SignalProducerProtocol {
 		return lift { $0.throttle(interval, on: scheduler) }
 	}
 
+	/// Conditionally throttles values sent on the receiver whenever
+	/// `shouldThrottle` is true, forwarding values on the given scheduler.
+	///
+	/// - note: While `shouldThrottle` remains false, values are forwarded on the
+	///         given scheduler. If multiple values are received while
+	///         `shouldThrottle` is true, the latest value is the one that will
+	///         be passed on.
+	///
+	/// - note: If the input signal terminates while a value is being throttled,
+	///         that value will be discarded and the returned signal will
+	///         terminate immediately.
+	///
+	/// - note: If `shouldThrottle` completes before the receiver, and its last
+	///         value is `true`, the returned signal will remain in the throttled
+	///         state, emitting no further values until it terminates.
+	///
+	/// - parameters:
+	///   - shouldThrottle: A boolean property that controls whether values
+	///                     should be throttled.
+	///   - scheduler: A scheduler to deliver events on.
+	///
+	/// - returns: A producer that sends values only while `shouldThrottle` is false.
+	public func throttle<P: PropertyProtocol>(while shouldThrottle: P, on scheduler: SchedulerProtocol) -> SignalProducer<Value, Error>
+		where P.Value == Bool
+	{
+		// Using `Property.init(_:)` avoids capturing a strong reference
+		// to `shouldThrottle`, so that we don't extend its lifetime.
+		let shouldThrottle = Property(shouldThrottle)
+
+		return lift { $0.throttle(while: shouldThrottle, on: scheduler) }
+	}
+
 	/// Debounce values sent by the receiver, such that at least `interval`
 	/// seconds pass after the receiver has last sent a value, then
 	/// forward the latest value on the given scheduler.
@@ -1188,6 +1203,108 @@ extension SignalProducerProtocol where Error == NoError {
 		return self
 			.promoteErrors(NewError.self)
 			.then(replacement)
+	}
+
+	/// Apply a failable `operation` to values from `self` with successful
+	/// results forwarded on the returned producer and thrown errors sent as
+	/// failed events.
+	///
+	/// - parameters:
+	///   - operation: A failable closure that accepts a value.
+	///
+	/// - returns: A producer that forwards successes as `value` events and thrown
+	///            errors as `failed` events.
+	public func attempt(_ operation: @escaping (Value) throws -> Void) -> SignalProducer<Value, AnyError> {
+		return lift { $0.attempt(operation) }
+	}
+
+	/// Apply a failable `operation` to values from `self` with successful
+	/// results mapped on the returned producer and thrown errors sent as
+	/// failed events.
+	///
+	/// - parameters:
+	///   - operation: A failable closure that accepts a value and attempts to
+	///                transform it.
+	///
+	/// - returns: A producer that sends successfully mapped values from `self`,
+	///            or thrown errors as `failed` events.
+	public func attemptMap<U>(_ operation: @escaping (Value) throws -> U) -> SignalProducer<U, AnyError> {
+		return lift { $0.attemptMap(operation) }
+	}
+}
+
+extension SignalProducer {
+	/// Create a `SignalProducer` that will attempt the given operation once for
+	/// each invocation of `start()`.
+	///
+	/// Upon success, the started signal will send the resulting value then
+	/// complete. Upon failure, the started signal will fail with the error that
+	/// occurred.
+	///
+	/// - parameters:
+	///   - operation: A closure that returns instance of `Result`.
+	///
+	/// - returns: A `SignalProducer` that will forward `success`ful `result` as
+	///            `value` event and then complete or `failed` event if `result`
+	///            is a `failure`.
+	public static func attempt(_ operation: @escaping () -> Result<Value, Error>) -> SignalProducer {
+		return self.init { observer, disposable in
+			operation().analysis(ifSuccess: { value in
+				observer.send(value: value)
+				observer.sendCompleted()
+				}, ifFailure: { error in
+					observer.send(error: error)
+			})
+		}
+	}
+}
+
+extension SignalProducerProtocol where Error == AnyError {
+	/// Create a `SignalProducer` that will attempt the given failable operation once for
+	/// each invocation of `start()`.
+	///
+	/// Upon success, the started producer will send the resulting value then
+	/// complete. Upon failure, the started signal will fail with the error that
+	/// occurred.
+	///
+	/// - parameters:
+	///   - operation: A failable closure.
+	///
+	/// - returns: A `SignalProducer` that will forward a success as a `value`
+	///            event and then complete or `failed` event if the closure throws.
+	public static func attempt(_ operation: @escaping () throws -> Value) -> SignalProducer<Value, Error> {
+		return .attempt {
+			ReactiveSwift.materialize {
+				try operation()
+			}
+		}
+	}
+
+	/// Apply a failable `operation` to values from `self` with successful
+	/// results forwarded on the returned producer and thrown errors sent as
+	/// failed events.
+	///
+	/// - parameters:
+	///   - operation: A failable closure that accepts a value.
+	///
+	/// - returns: A producer that forwards successes as `value` events and thrown
+	///            errors as `failed` events.
+	public func attempt(_ operation: @escaping (Value) throws -> Void) -> SignalProducer<Value, AnyError> {
+		return lift { $0.attempt(operation) }
+	}
+
+	/// Apply a failable `operation` to values from `self` with successful
+	/// results mapped on the returned producer and thrown errors sent as
+	/// failed events.
+	///
+	/// - parameters:
+	///   - operation: A failable closure that accepts a value and attempts to
+	///                transform it.
+	///
+	/// - returns: A producer that sends successfully mapped values from `self`,
+	///            or thrown errors as `failed` events.
+	public func attemptMap<U>(_ operation: @escaping (Value) throws -> U) -> SignalProducer<U, AnyError> {
+		return lift { $0.attemptMap(operation) }
 	}
 }
 
@@ -1500,7 +1617,7 @@ extension SignalProducerProtocol {
 	///
 	/// - returns: A signal producer start sequentially starts `self` after
 	///            previously started producer completes.
-	public func times(_ count: Int) -> SignalProducer<Value, Error> {
+	public func `repeat`(_ count: Int) -> SignalProducer<Value, Error> {
 		precondition(count >= 0)
 
 		if count == 0 {
@@ -1515,7 +1632,7 @@ extension SignalProducerProtocol {
 
 			func iterate(_ current: Int) {
 				self.startWithSignal { signal, signalDisposable in
-					serialDisposable.innerDisposable = signalDisposable
+					serialDisposable.inner = signalDisposable
 
 					signal.observe { event in
 						if case .completed = event {

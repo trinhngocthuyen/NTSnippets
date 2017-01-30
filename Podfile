@@ -2,7 +2,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
-    pod 'ReactiveCocoa', '~> 5.0.0-alpha.3'
+    pod 'ReactiveCocoa', '5.0.0'
     pod 'RxSwift', '~> 3.0.0'
     pod 'Alamofire', '4.2.0'
 end
