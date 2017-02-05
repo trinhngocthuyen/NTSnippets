@@ -61,3 +61,17 @@ line_length: 110
 #     - GlobalAPIKey
 # ------------------------------------------------------------------
 reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
+
+# CUSTOM RULES
+# ------------------------------------------------------------------
+custom_rules:
+  lowercase_enum:
+    included: ".*.swift"
+    name: "Lowercase Enum"
+    regex: "case ([`]?[A-Z][A-Za-z0-9_]*)"  # TODO: Exception: case abc, Xyz
+    match_kinds:
+      - keyword
+      - identifier
+    message: "Enum should be in lowercase"
+    severity: warning
+
