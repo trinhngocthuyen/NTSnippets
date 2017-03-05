@@ -44,6 +44,7 @@
 		8D06FED91E06CA96006D790D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D06FEDE1E06CAA9006D790D /* Functional_CurryAndCompositions.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_CurryAndCompositions.playground; sourceTree = "<group>"; };
 		8D4D09991E08449E00E8CCE7 /* Functional_Curry_ChangeCompletionToRAC.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Functional_Curry_ChangeCompletionToRAC.playground; sourceTree = "<group>"; };
+		8D59BF241E6BFE7B00124FFE /* RxSwift_Fundamental.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwift_Fundamental.playground; sourceTree = "<group>"; };
 		8DD765A51E18DAAA00D6B6C8 /* NTTesting.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NTTesting.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DD765A91E18DAAA00D6B6C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DD765AF1E18DD7000D6B6C8 /* Ex_StubNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ex_StubNetwork.swift; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 		8D06FE941E057E7F006D790D /* RxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				8D59BF241E6BFE7B00124FFE /* RxSwift_Fundamental.playground */,
 			);
 			path = RxSwift;
 			sourceTree = "<group>";

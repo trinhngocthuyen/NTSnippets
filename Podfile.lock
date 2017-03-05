@@ -15,7 +15,9 @@ PODS:
   - ReactiveSwift (1.1.0):
     - Result (~> 3.1)
   - Result (3.2.0)
-  - RxSwift (3.0.1)
+  - RxCocoa (3.2.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.2.0)
   - URITemplate (2.0.0)
 
 DEPENDENCIES:
@@ -25,7 +27,8 @@ DEPENDENCIES:
   - Nimble (= 5.1.0)
   - Quick (= 1.0.0)
   - ReactiveCocoa (~> 5.0.1)
-  - RxSwift (~> 3.0.0)
+  - RxCocoa (~> 3.2.0)
+  - RxSwift (~> 3.2.0)
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -36,9 +39,10 @@ SPEC CHECKSUMS:
   ReactiveCocoa: f577006aa6c7b0b08020109ebaae3b77ada00adc
   ReactiveSwift: 2f4e4a02e5a5c87ea63f5fe667163ce2a67cbb57
   Result: 5a6705171c0613cc5fbf6ec55ff520cc62a8e81d
-  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   URITemplate: a5acb3f76c6a2338116fde88b658d83f91bbac45
 
-PODFILE CHECKSUM: 8622b165af2ce14c83542bef33dfe1cfca3b6d57
+PODFILE CHECKSUM: 460b936b9914c343c212f05974c0e0c494a413bf
 
 COCOAPODS: 1.1.1

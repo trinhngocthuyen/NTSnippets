@@ -3,7 +3,8 @@ use_frameworks!
 
 def shared_pods
     pod 'ReactiveCocoa', '~> 5.0.1'
-    pod 'RxSwift', '~> 3.0.0'
+    pod 'RxSwift', '~> 3.2.0'
+    pod 'RxCocoa', '~> 3.2.0'
     pod 'Alamofire', '4.2.0'
 end
 
